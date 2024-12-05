@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>合成游戏 - 主题配置</title>
   <link rel="icon" type="image/png" href="./favicon.ico">
+  <script src="gtag.js"></script>
   <style>
     .header {
       position: fixed;
@@ -99,6 +100,8 @@
       text-align: center;
       background-color: white;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
     }
 
     .theme-option:hover {
@@ -170,6 +173,48 @@
         grid-template-columns: 1fr;
       }
     }
+
+    .theme-option.activating {
+      animation: activate-pulse 0.5s ease;
+    }
+
+    .theme-option.activating::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 126, 179, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: activate-ripple 0.5s ease-out;
+    }
+
+    @keyframes activate-pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(0.95);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes activate-ripple {
+      0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+      }
+      100% {
+        width: 200%;
+        height: 200%;
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 
@@ -206,39 +251,45 @@
 
   <script>
     function selectTheme(theme) {
+      // 获取被点击的主题元素
+      const clickedOption = document.querySelector(`.theme-option[onclick*="${theme}"]`);
+      
+      // 添加激活动画类
+      clickedOption.classList.add('activating');
+      
       // 保存主题设置
-      localStorage.setItem('theme', theme)
+      localStorage.setItem('theme', theme);
       
       // 创建提示元素
-      const toast = document.createElement('div')
-      toast.style.position = 'fixed'
-      toast.style.bottom = '20px'
-      toast.style.left = '50%'
-      toast.style.transform = 'translateX(-50%)'
-      toast.style.background = 'rgba(0, 0, 0, 0.7)'
-      toast.style.color = 'white'
-      toast.style.padding = '10px 20px'
-      toast.style.borderRadius = '4px'
-      toast.style.zIndex = '9999'
-      toast.textContent = '主题已更换'
-      document.body.appendChild(toast)
+      const toast = document.createElement('div');
+      toast.style.position = 'fixed';
+      toast.style.bottom = '20px';
+      toast.style.left = '50%';
+      toast.style.transform = 'translateX(-50%)';
+      toast.style.background = 'rgba(0, 0, 0, 0.7)';
+      toast.style.color = 'white';
+      toast.style.padding = '10px 20px';
+      toast.style.borderRadius = '4px';
+      toast.style.zIndex = '9999';
+      toast.textContent = '主题已更换';
+      document.body.appendChild(toast);
       
-      // 0.5秒后跳转
+      // 等待动画完成后跳转
       setTimeout(() => {
-        window.location.href = 'index.html'
-      }, 500)
+        window.location.href = 'index.html';
+      }, 500);
     }
 
     // 页面加载时高亮当前主题
     window.onload = function() {
-      const currentTheme = localStorage.getItem('theme')
+      const currentTheme = localStorage.getItem('theme');
       if (currentTheme) {
-        const options = document.querySelectorAll('.theme-option')
+        const options = document.querySelectorAll('.theme-option');
         options.forEach(option => {
           if (option.getAttribute('onclick').includes(currentTheme)) {
-            option.classList.add('selected')
+            option.classList.add('selected');
           }
-        })
+        });
       }
     }
   </script>
