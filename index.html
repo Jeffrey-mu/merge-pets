@@ -287,6 +287,11 @@
     const selectModal = false
 
     const theme = localStorage.getItem('theme') || 'shasha'
+    const keyMap = {
+      "shasha": "莎莎",
+      "xiaopang": "小胖",
+    }
+    document.title = "合成游戏 - " + keyMap[theme]
     const overrideFruit = [
       {
         "src": "./xigua/custom/" + theme + "/52x52.png?imageMogr2/crop/52x52",
