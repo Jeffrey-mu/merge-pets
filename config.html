@@ -112,10 +112,10 @@
 
     .theme-option.selected {
       border-color: #ff7eb3;
-      background: linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);
-      color: white;
+      background: linear-gradient(135deg, #ffd1e1 0%, #fff0f5 100%);
+      color: #2c3e50;
       transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(255, 126, 179, 0.3);
+      box-shadow: 0 8px 20px rgba(255, 126, 179, 0.2);
     }
 
     .theme-img {
@@ -125,8 +125,6 @@
       aspect-ratio: 1;
       object-fit: cover;
       margin-bottom: 15px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
 
     .theme-name {
@@ -195,9 +193,11 @@
       0% {
         transform: scale(1);
       }
+
       50% {
         transform: scale(0.95);
       }
+
       100% {
         transform: scale(1);
       }
@@ -209,6 +209,7 @@
         height: 0;
         opacity: 1;
       }
+
       100% {
         width: 200%;
         height: 200%;
@@ -242,58 +243,62 @@
         <img src="./images/xiaopang.png" alt="小胖" class="theme-img">
         <div class="theme-name">合成小胖</div>
       </div>
-      <div class="theme-option" onclick="selectTheme('xinxin')">
-        <img src="./images/xinxin.png" alt="欣欣" class="theme-img">
+      <div class="theme-option" onclick="selectTheme('ysx')">
+        <img src="./images/ysx.png" alt="欣欣" class="theme-img">
         <div class="theme-name">合成欣欣</div>
       </div>
-      <!-- <div class="theme-option" onclick="selectTheme('jcc')">
-        <img src="./images/chanchan.png" alt="铲铲" class="theme-img">
-        <div class="theme-name">合成铲铲</div>
-      </div> -->
+      <div class="theme-option" onclick="selectTheme('fruits')">
+        <img src="./images/fruits.png" alt="大西瓜" class="theme-img">
+        <div class="theme-name">合成大西瓜</div>
+      </div>
+      <div class="theme-option" onclick="selectTheme('food')">
+        <img src="./images/food.png" alt="美食" class="theme-img">
+        <div class="theme-name">合成美食</div>
+      </div>
     </div>
   </div>
 
   <script>
     function selectTheme(theme) {
       // 获取被点击的主题元素
-      const clickedOption = document.querySelector(`.theme-option[onclick*="${theme}"]`);
-      
+      const clickedOption = document.querySelector(`.theme-option[onclick*="${theme}"]`)
+
       // 添加激活动画类
-      clickedOption.classList.add('activating');
-      
+      clickedOption.classList.add('activating')
+
       // 保存主题设置
-      localStorage.setItem('theme', theme);
-      
+      localStorage.setItem('theme', theme)
+
       // 创建提示元素
-      const toast = document.createElement('div');
-      toast.style.position = 'fixed';
-      toast.style.bottom = '20px';
-      toast.style.left = '50%';
-      toast.style.transform = 'translateX(-50%)';
-      toast.style.background = 'rgba(0, 0, 0, 0.7)';
-      toast.style.color = 'white';
-      toast.style.padding = '10px 20px';
-      toast.style.borderRadius = '4px';
-      toast.style.zIndex = '9999';
-      toast.textContent = '主题已更换';
-      document.body.appendChild(toast);
-      
+      const toast = document.createElement('div')
+      toast.style.position = 'fixed'
+      toast.style.bottom = '20px'
+      toast.style.left = '50%'
+      toast.style.transform = 'translateX(-50%)'
+      toast.style.background = 'rgba(0, 0, 0, 0.7)'
+      toast.style.color = 'white'
+      toast.style.padding = '10px 20px'
+      toast.style.borderRadius = '4px'
+      toast.style.zIndex = '9999'
+      toast.textContent = '主题已更换'
+      document.body.appendChild(toast)
+
       // 等待动画完成后跳转
       setTimeout(() => {
-        window.location.href = 'index.html';
-      }, 500);
+        window.location.href = 'index.html'
+      }, 500)
     }
 
     // 页面加载时高亮当前主题
-    window.onload = function() {
-      const currentTheme = localStorage.getItem('theme');
+    window.onload = function () {
+      const currentTheme = localStorage.getItem('theme')
       if (currentTheme) {
-        const options = document.querySelectorAll('.theme-option');
+        const options = document.querySelectorAll('.theme-option')
         options.forEach(option => {
           if (option.getAttribute('onclick').includes(currentTheme)) {
-            option.classList.add('selected');
+            option.classList.add('selected')
           }
-        });
+        })
       }
     }
   </script>
