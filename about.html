@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>关于游戏</title>
+    <title>合成游戏 - 关于我们</title>
+    <link rel="icon" type="image/png" href="./favicon.ico">
     <style>
         .header {
             position: fixed;
@@ -144,6 +145,33 @@
             color: #ff758c;
             text-decoration: underline;
         }
+
+        .contact-info {
+            background: rgba(255, 126, 179, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid #ff7eb3;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 126, 179, 0.2);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            fill: #ff7eb3;
+        }
     </style>
 </head>
 <body>
@@ -186,11 +214,21 @@
                 <li>可以使用您喜欢的角色图片</li>
                 <li>支持自定义背景音乐</li>
             </ul>
-            <p class="contact-info" style="background: rgba(255, 126, 179, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid #ff7eb3;">
-                <strong>联系方式：</strong><br>
-                微信：jiafeng__wang<br>
-                邮箱：jeffrey.muc@gmail.com
-            </p>
+            <div class="contact-info">
+                <strong>联系方式：</strong>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M12,2C6.36,2 2,6.13 2,11.7C2,14.61 3.19,17.14 5.14,18.87C5.3,19 5.4,19.22 5.41,19.44L5.46,21.22C5.5,21.79 6.07,22.16 6.59,21.93L8.57,21.06C8.74,21 8.93,20.97 9.1,21C10,21.27 11,21.4 12,21.4C17.64,21.4 22,17.27 22,11.7C22,6.13 17.64,2 12,2Z"/>
+                    </svg>
+                    <span>微信：jiafeng__wang</span>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
+                    </svg>
+                    <span>邮箱：jeffrey.muc@gmail.com</span>
+                </div>
+            </div>
 
             <h2>联系我们</h2>
             <p>如果您在游戏过程中遇到任何问题，或有任何建议，欢迎联系我们。</p>

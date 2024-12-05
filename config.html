@@ -1,250 +1,247 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>主题配置</title>
-    <style>
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 20px;
-            padding: 0 20px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-            z-index: 1000;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>合成游戏 - 主题配置</title>
+  <link rel="icon" type="image/png" href="./favicon.ico">
+  <style>
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 20px;
+      padding: 0 20px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+      z-index: 1000;
+    }
 
-        .back-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: #333;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 8px 16px;
-            border-radius: 25px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #333;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 8px 16px;
+      border-radius: 25px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
 
-        .back-btn:hover {
-            color: #ff7eb3;
-            background: white;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
+    .back-btn:hover {
+      color: #ff7eb3;
+      background: white;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
 
-        .back-icon {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
+    .back-icon {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
 
-        body {
-            padding-top: 50px;
-            font-family: 'Microsoft YaHei', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-        }
+    body {
+      padding-top: 50px;
+      font-family: 'Microsoft YaHei', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    }
 
-        .config-container {
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
+    .config-container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      backdrop-filter: blur(10px);
+      width: 90%;
+      max-width: 1200px;
+      margin-top: 30px;
+    }
 
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 30px;
-            font-size: 28px;
-            font-weight: 600;
-        }
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 600;
+    }
 
-        .theme-options {
-            display: flex;
-            gap: 25px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+    .theme-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      padding: 0 20px;
+    }
 
-        .theme-option {
-            cursor: pointer;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 16px;
-            transition: all 0.3s ease;
-            width: 200px;
-            text-align: center;
-            background-color: white;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
+    .theme-option {
+      cursor: pointer;
+      padding: 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      text-align: center;
+      background-color: white;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
 
-        .theme-option:hover {
-            border-color: #ff7eb3;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
+    .theme-option:hover {
+      border-color: #ff7eb3;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
 
-        .theme-option.selected {
-            border-color: #ff7eb3;
-            background: linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);
-            color: white;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(255, 126, 179, 0.3);
-        }
+    .theme-option.selected {
+      border-color: #ff7eb3;
+      background: linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);
+      color: white;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(255, 126, 179, 0.3);
+    }
 
-        .save-btn {
-            margin-top: 35px;
-            padding: 14px 40px;
-            background: linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 126, 179, 0.3);
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
+    .theme-img {
+      width: 100%;
+      height: auto;
+      max-width: 220px;
+      aspect-ratio: 1;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
 
-        .save-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 126, 179, 0.4);
-        }
+    .theme-name {
+      font-size: 18px;
+      margin-top: 15px;
+      font-weight: 500;
+    }
 
-        .theme-img {
-            width: 180px;
-            height: 180px;
-            object-fit: cover;
-            margin-bottom: 10px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      margin-left: auto;
+    }
 
-        .theme-name {
-            font-size: 16px;
-            margin-top: 12px;
-            font-weight: 500;
-        }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      color: #333;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 15px;
-            margin-left: auto;
-        }
+    .nav-link:hover {
+      color: #ff7eb3;
+      background: white;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
 
-        .nav-link {
-            display: flex;
-            align-items: center;
-            color: #333;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 8px 16px;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
+    @media (max-width: 1024px) {
+      .theme-options {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
-        .nav-link:hover {
-            color: #ff7eb3;
-            background: white;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-    </style>
+    @media (max-width: 768px) {
+      .theme-options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="header">
-        <a href="index.html" class="back-btn">
-            <svg class="back-icon" viewBox="0 0 24 24">
-                <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
-            </svg>
-            返回游戏
-        </a>
-        <div class="nav-links">
-            <a href="about.html" class="nav-link">关于我们</a>
-        </div>
+  <div class="header">
+    <a href="index.html" class="back-btn">
+      <svg class="back-icon" viewBox="0 0 24 24">
+        <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+      </svg>
+      返回游戏
+    </a>
+    <div class="nav-links">
+      <a href="about.html" class="nav-link">关于我们</a>
     </div>
+  </div>
 
-    <div class="config-container">
-        <h1>选择主题</h1>
-        <div class="theme-options">
-            <div class="theme-option" onclick="selectTheme(this, 'shasha')">
-                <img src="./images/shasha.png" alt="莎莎" class="theme-img">
-                <div class="theme-name">合成莎莎</div>
-            </div>
-            <div class="theme-option" onclick="selectTheme(this, 'xiaopang')">
-                <img src="./images/xiaopang.png" alt="小胖" class="theme-img">
-                <div class="theme-name">合成小胖</div>
-            </div>
-            <div class="theme-option" onclick="selectTheme(this, 'xinxin')">
-                <img src="./images/xinxin.png" alt="欣欣" class="theme-img">
-                <div class="theme-name">合成欣欣</div>
-            </div>
-        </div>
-        <button class="save-btn" onclick="saveTheme()">保存设置</button>
+  <div class="config-container">
+    <h1>选择主题</h1>
+    <div class="theme-options">
+      <div class="theme-option" onclick="selectTheme('shasha')">
+        <img src="./images/shasha.png" alt="莎莎" class="theme-img">
+        <div class="theme-name">合成莎莎</div>
+      </div>
+      <div class="theme-option" onclick="selectTheme('xiaopang')">
+        <img src="./images/xiaopang.png" alt="小胖" class="theme-img">
+        <div class="theme-name">合成小胖</div>
+      </div>
+      <div class="theme-option" onclick="selectTheme('xinxin')">
+        <img src="./images/xinxin.png" alt="欣欣" class="theme-img">
+        <div class="theme-name">合成欣欣</div>
+      </div>
     </div>
+  </div>
 
-    <script>
-        let selectedTheme = '';
+  <script>
+    function selectTheme(theme) {
+      // 保存主题设置
+      localStorage.setItem('theme', theme)
+      
+      // 创建提示元素
+      const toast = document.createElement('div')
+      toast.style.position = 'fixed'
+      toast.style.bottom = '20px'
+      toast.style.left = '50%'
+      toast.style.transform = 'translateX(-50%)'
+      toast.style.background = 'rgba(0, 0, 0, 0.7)'
+      toast.style.color = 'white'
+      toast.style.padding = '10px 20px'
+      toast.style.borderRadius = '4px'
+      toast.style.zIndex = '9999'
+      toast.textContent = '主题已更换'
+      document.body.appendChild(toast)
+      
+      // 0.5秒后跳转
+      setTimeout(() => {
+        window.location.href = 'index.html'
+      }, 500)
+    }
 
-        function selectTheme(element, theme) {
-            // 移除其他选项的选中状态
-            document.querySelectorAll('.theme-option').forEach(option => {
-                option.classList.remove('selected');
-            });
-            
-            // 添加当前选项的选中状态
-            element.classList.add('selected');
-            selectedTheme = theme;
-        }
-
-        function saveTheme() {
-            if (!selectedTheme) {
-                alert('请选择一个主题！');
-                return;
-            }
-            
-            // 保存主题设置到 localStorage
-            localStorage.setItem('theme', selectedTheme);
-            alert('主题设置已保存！');
-        }
-
-        // 页面加载时恢复之前的选择
-        window.onload = function() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                const options = document.querySelectorAll('.theme-option');
-                options.forEach(option => {
-                    if (option.getAttribute('onclick').includes(savedTheme)) {
-                        selectTheme(option, savedTheme);
-                    }
-                });
-            }
-        }
-    </script>
+    // 页面加载时高亮当前主题
+    window.onload = function() {
+      const currentTheme = localStorage.getItem('theme')
+      if (currentTheme) {
+        const options = document.querySelectorAll('.theme-option')
+        options.forEach(option => {
+          if (option.getAttribute('onclick').includes(currentTheme)) {
+            option.classList.add('selected')
+          }
+        })
+      }
+    }
+  </script>
 </body>
+
 </html>
