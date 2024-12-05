@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>合成莎莎</title>
+  <meta charset="utf-8">
+  <meta name="referrer" content="no-referrer" />
+  <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">  -->
+  <!--http://www.html5rocks.com/en/mobile/mobifying/-->
+  <meta name="viewport"
+    content="width=device-width,user-scalable=no,initial-scale=1, minimum-scale=1,maximum-scale=1" />
+  <!--https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <!-- force webkit on 360 -->
+  <meta name="renderer" content="webkit" />
+  <meta name="force-rendering" content="webkit" />
+  <!-- force edge on IE -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="msapplication-tap-highlight" content="no">
+  <!-- force full screen on some browser -->
+  <meta name="full-screen" content="yes" />
+  <meta name="x5-fullscreen" content="true" />
+  <meta name="360-fullscreen" content="true" />
+  <!-- force screen orientation on some browser -->
+  <meta name="screen-orientation" content="" />
+  <meta name="x5-orientation" content="">
+  <!--fix fireball/issues/3568 -->
+  <!--<meta name="browsermode" content="application">-->
+  <meta name="x5-page-mode" content="app">
+  <!--<link rel="apple-touch-icon" href=".png" />-->
+  <!--<link rel="apple-touch-icon-precomposed" href=".png" />-->
+  <!-- <script>
+        pushHistory();
+        window.addEventListener("popstate", function(e) {
+
+        }, false);
+        function pushHistory() {
+            var state = {
+                title: "",
+                url: window.location.href
+            };
+            window.history.pushState(state, state.title, state.url);
+        }
+    </script> -->
+  <!--    <script type="text/javascript">
+        var ua = navigator.userAgent.toLowerCase(); //获取判断用的对象
+        //判断是否是微信下访问
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            // if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+            location.href = "https://mp.weixin.qq.com/s/m0U0L-vnD0Gu8aPJ2vcPoA";
+            // }
+        }
+    </script>-->
+  <link rel="stylesheet" type="text/css" href="./xigua/style-mobile.css" />
+</head>
+
+<body style="margin: 0; background: #ddd;" align="center">
+  <!-- <div style="align:center;display: none"><img src="./xigua/res/share.jpg" width="10%" /> -->
+  <div id="canvasDiv" style="width:100%;height:100%;">
+    <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
+    <div id="block-Box" style="display:block;width:100%;height:100%;"></div>
+  </div>
+  <div id="adContainer" style="display:none;position: absolute;top:0px;left: 0px;width:100%;height:100%;z-index:999;">
+  </div>
+  <div id="loadingText"
+    style="width:100%;display: none;text-align:center;position:absolute;top:45%;z-index:2;font-size:20px;color:#f99f0a">
+    loading......0%
+  </div>
+  <div id="splash">
+    <!-- <div class="progress-bar stripes"> -->
+    <!-- <span style="width: 0%"></span> -->
+    <!-- </div> -->
+  </div>
+  <div id="loadingImg" style="top:45%;width: 100%;position:absolute; ">
+    <img src="./xigua/res/loading.gif" width="7%" height="7%" />
+  </div>
+  <!-- <script type="text/javascript" src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script> -->
+  <!-- <script type="text/javascript" src="./xigua/ads.js"></script> -->
+
+  <script type="text/javascript">
+    function noAdGoToScene() {
+      var GameConfig = __require("GameConfig")
+      console.log("IndexMainMangerMaing", GameConfig.launchScene, GameConfig.Bros, GameConfig.caS)
+
+      var launchScene = GameConfig.launchScene
+      var Bros = GameConfig.Bros
+      var caS = GameConfig.caS
+      cc.director.loadScene(launchScene, null, function () {
+        adCompleteFlag = false
+        if (Bros) {
+          // show canvas
+          var canvas = document.getElementById('GameCanvas')
+          canvas.style.visibility = ''
+          var div = document.getElementById('GameDiv')
+          if (div) {
+            div.style.backgroundImage = ''
+          }
+        }
+        cc.loader.onProgress = null
+        console.log('Success to load scene1Main: ' + launchScene)
+      }
+      )
+    };
+  </script>
+
+  <!-- <script src="./xigua/src/settings.js" charset="utf-8"></script> -->
+
+  <script type="text/javascript">
+    window._CCSettings = {
+      platform: "web-mobile",
+      groupList: ["default", "bg", "ui", "wall", "fruit", "line", "downwall", ""],
+      collisionMatrix: [
+        [false, null, null, false],
+        [false, false, null, false],
+        [false, false, false],
+        [false, false, false, false, true, false, false],
+        [false, false, false, true, true, true, true, false],
+        [false, false, false, false, true, false, false, false],
+        [false, false, false, false, true, false, false],
+        [false, false, false, false, false, false, false, false]
+      ],
+      rawAssets: {
+        assets: {
+          "0": ["default_btn_pressed.png", 1],
+          "5": ["music/success.mp3", 4],
+          "6": ["music/炸.mp3", 4],
+          "8": ["music/合成.mp3", 4],
+          "9": ["music/2.mp3", 4],
+          "10": ["music/1.mp3", 4],
+          "12": ["panel/GameOverLayer.prefab", 5],
+          e7ME0lTvlNb4HX93TA0F1d: ["default_btn_pressed", 0, 1],
+          "41eopZwPxHZ4viv1Eku0uN": ["panel/LinkIconSpr.prefab", 5]
+        },
+        internal: {
+          "1": ["materials/builtin-unlit.mtl", 3],
+          "2": ["effects/builtin-unlit.effect", 2],
+          "3": ["effects/builtin-2d-gray-sprite.effect", 2],
+          "4": ["materials/builtin-2d-gray-sprite.mtl", 3],
+          "13": ["effects/builtin-clear-stencil.effect", 2],
+          "14": ["materials/builtin-clear-stencil.mtl", 3],
+          "15": ["effects/builtin-2d-spine.effect", 2],
+          "16": ["materials/builtin-2d-spine.mtl", 3],
+          "28dPjdQWxEQIG3VVl1Qm6T": ["effects/builtin-2d-sprite.effect", 2],
+          "796vrvt+9F2Zw/WR3INvx6": ["effects/builtin-unlit-transparent.effect", 2],
+          "6fgBCSDDdPMInvyNlggls2": ["materials/builtin-2d-base.mtl", 3],
+          "ecpdLyjvZBwrvm+cedCcQy": ["materials/builtin-2d-sprite.mtl", 3]
+        }
+      },
+      assetTypes: ["cc.SpriteFrame", "cc.Texture2D", "cc.EffectAsset", "cc.Material", "cc.AudioClip", "cc.Prefab"],
+      launchScene: "db://assets/Scene/MainGameScene.fire",
+      scenes: [{
+        url: "db://assets/Scene/MainGameScene.fire",
+        uuid: 7
+      }],
+      packedAssets: {
+        "049f3a810": ["00/EFfjElOWId9B1zBG65K", "02delMVqdBD70a/HSD99FK", "03wz9VWTJP94lrgUujqO24", "0cuz27KoVCpb4hmDlhHlr3", "13Le2CPjlOLrw0/JNIcPhM", "13e4vXA9xHvpTR79esXQp0", "174oR9KZhO9JbV7v4xE3ww", "18dkD/iU9H+7Ohh04GiPIx", "19CuZYXWREsbpGboXrMGP5", "292nqIZ1xO0KmLyOv5GA30", "2dUWCjA6RPYJNUO053IAix", "3b5V3m3VBNXbaXHmWjKsC2", "3eX+ScAINKMbfp34P/uuqw", "3eeMUvLbxD7ZE7ax/ZB97n", "44gs9IhQtCIbDernVZrrVM", "47VjEbQ2RBYLx+KZh29Jdw", "4bGaeeVWZCqr+ZdexT94qU", "4bvNoenrRPVpT4typ0IiYM", "4eGaGBr25O8Yrca6vsF3PA", "50NSZsjfNCNo2Co3Xpeg2c", "536Onqp61NfbovIGjz5l72", "55B21T8f1A/Zf8OhTKEaEK", "55R3S0ssFFOZeGtOQkAavE", "56S6YgalVMvqWmb6Pt2AFR", "5aqToRvfBCNbhG3e32kRzM", "5fkyBCD0JE+p9H4+pJhQgH", "5foCZNrL9Ke4kjwQbsO5IV", "64NDfStvpAaoE9VodJ4IXS", "66Wg7JbENIWJdMAlUU8qDn", "68JBmQV/xDqr8o7ceMaAj/", "69tmDgTPdFhq8xJ8xIlHuN", "6fjigbVlBLXqH+OXUh1wXQ", "71VhFCTINJM6/Ky3oX9nBT", "74I3BXKIBOH4p4bY7wCh9f", "80BrQDyu9PhJ0Z86rVYNs9", "84vJ1Ag9BIDLRqPvWeYD4U", "85YmfQaJFGYKKKPrEQv2OV", "86jDFivHhMf6inDLIoJwD2", "86o1FnGmRDRqw4ROp3tDhh", "8cUqhRmWlHApmXCiyp9Ddz", "8eXVr1cI5KK5Z9V2W4QR5P", "8eqYAPJy1ElJnU5T1Vme7+", "95Thg4bxZLlIVa4u2r4Kl7", "97Qv+7JBJHvby7AJZ8lD7b", "9e2RrV3HVI97HdMNwpBIlp", "a1/pBfYZhKjaDDJClfhDo7", "a5MTATjQNPt4736UDCJ8xh", "a7mM0lQUVLC7/9Ry9Cl36f", "a73hCZ/6tFC421VLUVFP1U", "a8Anh32NZGRZegUtSgEj26", "a9jxOwyflFwacoRm5yk4u8", "adFszcl15Dk657isecN5Xy", "ae0aol/0JF/aec8JnkneKe", "b03ZhiGzNIV4fzDUXzJfY7", "b1Odi1mLNEHaDvPRc5pU9n", "b3H1GONCxFP4JGDgYZR+Pm", "b4P/PCArtIdIH38t6mlw8Y", "b7kf5xpnlLtrQ0iYcrZFkK", "bbhcqtGR5AtrldfrXaYVA/", "bcssm8oBxAnImERxJEbh8F", "bdWFyvdFFJobLF0Pie0Ma9", "beSMv3mcRKhI9G0SGsi9V1", "c1Xz6l+aBOcLWzVl7eEd8c", "c2HQuONkBIbK+1Y23u1fa4", 0, "cc7MpJSbRMd5fMcB/bbznZ", "d0xnbkCVZKA5Cv/uAoz6vk", "d427JGp29HD4xiQHWNxHj2", "d7dRTX58pMnrD4/mG455OC", "db3w/ze2FJD5VaeYQzbFca", "e36xbamtdCNJlwiRYtcuO/", "e4msy+peJNTJJJTOkm2bmX", "e5J9mN/hBOOan+5gBVTgxD", "e9ROHL+p9Ix5DEwF/vMXb8", "e9yBRNBcRCAbaaFZSgiIsa", "eadLsWqWRFU7BRdOK2gj50", "ebyNd0WWVBbpb4i0TFUlcP", "eb3A6RnrJAtoIRUGGnO7VC", "ffBKvw4z9DIb4QlJDOO2VH", "ffGAgcvZ1IuYRZ9pFs0gwO"],
+        "079499991": [1, 2],
+        "07ce7530a": [3, 4],
+        "0ab855d50": ["00YlSnEflNuL/CoEA+7Zi3", "014XUYxWtOVI8je+XPpJRA", "04ng7y4NFDYLe8ISlFRyOl", "06d8KbeyFHs5nOlrC061nY", "14zuaqccFAwrYycNdXqwyc", "18O7sCEFdCs6wh8eMgUQQy", "18VYz40WlC559J4uoYkyvh", "1fY+uzTmJIo43Gp6TKhz4J", "21vsDOZSFIy7SF46VmRGvH", "273daJCAFM1JF0aIe+1DSg", "2apY4h391HdqhtGzSmqh4x", "2dK7ELxBtAjIY2QqFDgPv8", "30A8BT8/xDfZ5M3d5atego", "33PQT1T9RFL56FTz0EzFZL", "397fjEi/dAXZx1jkKS0t32", "3bb1xx+nlLNIBodJF+NY8V", "41D7kWhyFGY7q4NDlzkazn", "44CMk6I5BMHLKJXe1arCK4", "44GmLOMUhKr6Ju9ZvDwX5M", "45WPdMDVNEeYYJmK/WEvRQ", "4aAmHV30tL8qqOcoFb/9+7", "4axc2oXOpDv4Pj7dHd6oVN", "4bJHCUiMZAkJWPSuSfgqWX", "4dVswl8VBIjIIWWNoagmMF", "4f54o3c71D/ISx6BQ2Kjob", "52Y5MJGGpDUbP9BPQy9ONn", "5675cd/uhC2pm1bEfEgE8F", "5aJtGAOjVEILw6Z/MuS88O", "5dOV4Jx2FP84EGGTt1wqTo", "61QEQLRKdJTqxqnXU3cJ9o", "622/O3s39CuoJnHkYMOSyE", "630AG9sFBPp7NO1HxfJGG2", "66cgReSWFLu4xMm/mtN/aG", "6cF0aL6NNIBLv2vHfvpMin", "6f6brJUGNIq5or2MhIexcM", "71f749wF5JS4DoUc6NPv0v", "73rtTIsu5B9bZ6sByTSKFK", "7483eySmpO1oAoBaf0Zg1z", "7aS72ysl9BFr71LrnltqNd", "81GX+uVWBMLZ6tPjHkWF0o", "81/anfz7NNVKCtHdbt8dla", "87XaaOHkxEPLjSxc9/bRQw", "89eEhNuWBI95OMkD/zl7q+", "91zjFPskxDTY5P38wP5J9h", "95mhffC/VHl6BpDIlOMmEF", "97fH7DOHpEYpUcBUz6T56S", "97oZBSEUJIdaizDAnWmg+q", "9dMQc1a3JEM4phWNuFFiqV", "9euT2Fb7FM0bETbspmyCDb", "a03/GKZ8BJjIsDTFEkNomr", "a1D/RiOlxHfqoHL4PU462k", 11, "a4MaampVJNALtYMNamUFFY", 5, "a9e42cEw1GppMVPmx5PrjB", "ael56Iw8NBcYnb/PbiUUPe", "afGNetS8tNiL0OzlLNx/6n", "af6GiovU1ADoud5e2OKPeT", "b0oMPq6yVOg6pTzTRP+oDT", 6, 7, "c58adhrhpCzId1+qaXpXxt", "cb/uEilxpFCb2uQZcRS6yt", "cdvOUzNRVCU6GOjRXJmpWn", "d0cbfgUeJBu6n4xGbetPPe", 8, 9, "d5JOsCr1JCF5Rf11pIZNjy", "d58kwgSV9H0oNLRR8gTPdu", "ddPk35BrdEqJiAzXciE97I", "ddT/2edhlFc7ktWmTjlItk", "ddUbctRn9GrrDwlyxtHcNy", "dfHrD9xJpM1IG6WbQFKTUY", "dfv22zjMBB17xkb0BRRalR", "e3bjxRnSFHlIo730zmJ05G", "e4am+fYUhKM6YbwlHn/rpZ", "e7l11YnBxGbbRs3B6mjs2s", "eaoRD6wn9L8ZvoFaS/Q4if", "eeL6kypIhJZ54/EzR7ZlEv", "efvW6eRbRBlJgD8fegz2p/", "f0B4aheHVKL6NNsLTGY4uJ", 10, "f6ZjdhdJxLfZyh9uITVQMn", "f7I1Im7HNJRZs40j48Q/dD", "f8SbpaKgpMsqUXz3OSmLDR", "fa+jRxcdtOhIrqQyzKNPO+", "feTUujkOdEb7+9cpR1dFuO"],
+        "0b07e7e0f": ["29FYIk+N1GYaeWH/q1NxQO", "34R3lnfbNMv5L6ZAG+xSeu", "7dMxilsVFO7KhyGLUf8DtC", 11, "d2W5cVv6xIKb70c3bLS1yB", 12, "e97GVMl6JHh5Ml5qEDdSGa", "f9Zm9zf7JK4Iuw7NPuurqV", "faXAasOthBV4dJrGXhhX/8"],
+        "0d669730c": [13, 14],
+        "0e4bc3b03": [15, 16]
+      },
+      md5AssetsMap: {},
+      orientation: "",
+      debug: false,
+      subpackages: {},
+      uuids: ["c3oZr/VAhL3Ykvi70nVIGv", "2aKWBXJHxKHLvrBUi2yYZQ", "6dkeWRTOBGXICfYQ7JUBnG", "14TDKXr2NJ6LjvHPops74o", "3ae7efMv1CLq2ilvUY/tQi", "a7Q5CubWhI0a029lKkO4aU", "bbVMxP2gVDD74JoNq2RzVi", "c52ohf1dpDO5oKWBAPxgOx", "d2y1pPEzROq4V4p2qgKGRO", "d3FK71kg1E9KomQjw2ZKzG", "f2asWmuOFID7dBzwYIuDuw", "a2MjXRFdtLlYQ5ouAFv/+R", "d42UJPCZRDh5vQjrW6cf9h", "c0BAyVxX9JzZy8EjFrc9DU", "cffgu4qBxEqa150o1DmRAy", "0ek66qC1NOQLjgYmi04HvX", "7a/QZLET9IDreTiBfRn2PD"]
+    };
+  </script>
+
+  <script type="text/javascript">
+    var preloader
+    var adCompleteFlag = false
+    var resCompleteFlag = false
+
+    var adEndComplete = false
+    var resEndComplete = false
+
+    var loadintT = document.getElementById("loadingText")
+    var loadintGif = document.getElementById("loadingImg")
+    setTimeout(function () {
+      loadintGif.remove()
+      loadintT.style.display = ""
+      updateLabView(0.1)
+    }, 1 * 1000)
+
+    window.timer = null
+    window.tempSeconds = 1
+    window.loadData = {}
+    loadData.completedCount = 0
+    loadData.totalCount = 0
+
+    onload()
+
+    function onload() {
+      var winHeight = document.documentElement.clientHeight
+      document.getElementById("canvasDiv").style.height = winHeight + "px"
+    };
+    window.onload = function () {
+      document.getElementById("block-Box").style.display = "none"
+    }
+
+    function updateLabView(t) {
+      if (timer != null) {
+        clearInterval(timer)
+      }
+      timer = setInterval(function () {
+        tempSeconds++
+        actualTotal()
+        var loadintT = document.getElementById("loadingText")
+        if (!loadintT) {
+          return
+        }
+        loadintT.innerHTML = 'loading......' + parseInt(tempSeconds) + '%'
+
+        switch (tempSeconds) {
+          case 20:
+            updateLabView(0.2)
+            break
+          case 40:
+            updateLabView(0.3)
+            break
+          case 60:
+            updateLabView(0.4)
+            break
+          case 96:
+            updateLabView(5)
+            break
+          case 97:
+            updateLabView(10)
+            break
+          case 98:
+            updateLabView(50)
+            break
+          case 99:
+            updateLabView(100)
+            break
+          default:
+            if (tempSeconds >= 80 && tempSeconds < 96) {
+              updateLabView(t + 0.1)
+            }
+            break
+        }
+        if (tempSeconds > 100) {
+          clearInterval(timer)
+          tempSeconds = 100
+          loadintT.innerHTML = 'loading......' + parseInt(tempSeconds) + '%'
+        }
+      }, t * 1000)
+    }
+
+    function actualTotal() {
+      var percent = parseInt(100 * loadData.completedCount / loadData.totalCount)
+      if (percent > tempSeconds && loadData.totalCount > 1) {
+        tempSeconds = percent
+      }
+    }
+
+    /*setTimeout("ShowBannerAD()","2000");*/
+  </script>
+
+  <script charset="utf-8">
+    const gameID = "utzxaw15"
+    const gameId = "utzxaw15"
+    const reverseLevelUp = false
+    const scheme = "https://"
+
+    const extraScore = 1
+    const wuDi = true
+    const firstFruit = 1
+    const minRandomFruitNum = reverseLevelUp ? 6 : 0
+    const maxRandomFruitNum = reverseLevelUp ? 9 : 5
+    const setFruits = {
+      startFruits: reverseLevelUp ? [10, 10, 9, 8, 8, 7] : [0, 0, 1, 2, 2, 3],
+      randomFunction: () => {
+        return minRandomFruitNum + Math.floor(Math.random() * (maxRandomFruitNum - minRandomFruitNum))
+      }
+    }
+    const fruitQTan = false
+    const fruitSlowDown = false
+    const clickChangeFruit = false
+    const adLink = './config.html'
+    const selectModal = false
+
+    const theme = localStorage.getItem('theme') || 'shasha'
+    const overrideFruit = [
+  {
+    "src": "./xigua/custom/" + theme + "/52x52.png?imageMogr2/crop/52x52",
+    "name": "葡萄",
+    "offset": [0, 0],
+    "rect": [0, 0, 52, 52],
+    "size": [52, 52]
+  },
+  {
+    "src": "./xigua/custom/" + theme + "/80x80.png?imageMogr2/crop/80x80",
+    "name": "樱桃",
+    "offset": [0, 0],
+    "rect": [0, 0, 80, 80],
+    "size": [80, 80]
+  },
+  {
+    "src": "./xigua/custom/" + theme + "/108x108.png?imageMogr2/crop/108x108",
+    "name": "橘子",
+    "offset": [0, 0],
+    "rect": [0, 0, 108, 108],
+    "size": [108, 108]
+  },
+  {
+    "src": "./xigua/custom/" + theme + "/119x119.png?imageMogr2/crop/119x119",
+    "name": "柠檬",
+    "offset": [0, 0],
+    "rect": [0, 0, 119, 119],
+    "size": [119, 119]
+  },
+  {
+    "src": "./xigua/custom/" + theme + "/153x152.png?imageMogr2/crop/153x152",
+    "name": "猕猴桃",
+    "offset": [0, 0],
+    "rect": [0, 0, 153, 152],
+    "size": [153, 152]
+  },
+  {
+    "src": "./xigua/custom/" + theme + "/183x183.png",
+    "name": "西红柿",
+    "offset": [0, 0],
+    "rect": [0, 0, 183, 183],
+    "size": [183, 183]
+  },
+  {
+    "src": "./xigua/custom/" + theme + "/193x193.png",
+    "name": "桃",
+    "offset": [0, 0],
+    "rect": [0, 0, 193, 193],
+    "size": [193, 193]
+  },
+  {
+    "src": "./xigua/custom/" + theme + "/258x258.png",
+    "name": "菠萝",
+    "offset": [0, 0],
+    "rect": [0, 0, 258, 258],
+    "size": [258, 258]
+  },
+  {
+    "src": "./xigua/custom/" + theme + "/308x308.png",
+    "name": "椰子",
+    "offset": [0, 0],
+    "rect": [0, 0, 308, 308],
+    "size": [308, 308]
+  },
+  {
+    "src": "./xigua/custom/" + theme + "/308x309.png",
+    "name": "西瓜",
+    "offset": [0, 0],
+    "rect": [0, 0, 308, 309],
+    "size": [308, 309]
+  },
+      {
+        "src": "./xigua/custom/" + theme + "/408x408.png",
+        "name": "大西瓜",
+        "offset": [0, 0],
+        "rect": [0, 0, 408, 408],
+        "size": [408, 408]
+  }
+] 
+
+    const background = "";
+  </script>
+  <script src="./xigua/main_1201.js" charset="utf-8"></script>
+
+  <script>
+    window.adsbygoogle = window.adsbygoogle || []
+    const adBreak = function (o) {
+      adsbygoogle.push(o)
+    }
+  </script>
+
+  <script type="text/javascript">
+      (function () {
+        // open web debugger console
+        if (typeof VConsole !== 'undefined') {
+          window.vConsole = new VConsole()
+        }
+
+        var splash = document.getElementById('splash')
+        splash.style.display = 'block'
+
+        console.log("indexlTextTTTT")
+
+        var cocos2d = document.createElement('script')
+        cocos2d.async = true
+        cocos2d.src = './xigua/cocos2d-js-min_712.js'
+
+        var engineLoaded = function () {
+          document.body.removeChild(cocos2d)
+          cocos2d.removeEventListener('load', engineLoaded, false)
+          window.boot()
+        }
+        cocos2d.addEventListener('load', engineLoaded, false)
+        document.body.appendChild(cocos2d)
+      })();
+  </script>
+</body>
+
+</html>

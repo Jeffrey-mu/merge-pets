@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于游戏</title>
+    <style>
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 20px;
+            padding: 0 20px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #333;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 16px;
+            border-radius: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .back-btn:hover {
+            color: #ff7eb3;
+            background: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .back-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            color: #333;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-link:hover {
+            color: #ff7eb3;
+            background: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            padding-top: 50px;
+            font-family: 'Microsoft YaHei', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+
+        .about-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            width: 90%;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .content {
+            line-height: 1.8;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+
+        .content h2 {
+            color: #ff758c;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .content p {
+            margin-bottom: 15px;
+        }
+
+        .content ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .content li {
+            margin-bottom: 8px;
+        }
+
+        .content a {
+            color: #ff7eb3;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .content a:hover {
+            color: #ff758c;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">
+            <svg class="back-icon" viewBox="0 0 24 24">
+                <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
+            </svg>
+            返回游戏
+        </a>
+        <div class="nav-links">
+            <a href="about.html" class="nav-link">关于我</a>
+        </div>
+    </div>
+
+    <div class="about-container">
+        <h1>关于游戏</h1>
+        <div class="content">
+            <h2>游戏介绍</h2>
+            <p>这是一个有趣的合成游戏，你可以选择不同的主题进行游戏。游戏支持多种主题角色，包括莎莎、小胖和欣欣。</p>
+
+            <h2>游戏玩法</h2>
+            <ul>
+                <li>在游戏界面拖动相同的元素进行合成</li>
+                <li>合成更高级的元素可以获得更高的分数</li>
+                <li>尝试获得最高分，挑战自己的极限</li>
+            </ul>
+
+            <h2>主题选择</h2>
+            <p>游戏提供了多个可爱的主题角色供选择：</p>
+            <ul>
+                <li>莎莎主题</li>
+                <li>小胖主题</li>
+                <li>欣欣主题</li>
+            </ul>
+
+            <h2>DIY主题</h2>
+            <p>想要定制专属于你的主题吗？我们提供DIY主题服务！</p>
+            <ul>
+                <li>可以使用您喜欢的角色图片</li>
+                <li>支持自定义背景音乐</li>
+            </ul>
+            <p class="contact-info" style="background: rgba(255, 126, 179, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid #ff7eb3;">
+                <strong>联系方式：</strong><br>
+                微信：jiafeng__wang<br>
+                邮箱：jeffrey.muc@gmail.com
+            </p>
+
+            <h2>联系我们</h2>
+            <p>如果您在游戏过程中遇到任何问题，或有任何建议，欢迎联系我们。</p>
+        </div>
+    </div>
+</body>
+</html> 
