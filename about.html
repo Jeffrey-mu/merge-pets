@@ -148,30 +148,80 @@
         }
 
         .contact-info {
-            background: rgba(255, 126, 179, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            border-left: 4px solid #ff7eb3;
-            margin: 20px 0;
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(255, 126, 179, 0.15);
             transition: all 0.3s ease;
         }
 
-        .contact-info:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255, 126, 179, 0.2);
+        .contact-info strong {
+            display: block;
+            color: #ff758c;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 126, 179, 0.1);
+        }
+
+        .contact-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
         .contact-item {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 10px 0;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px;
+            background: rgba(255, 126, 179, 0.03);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 126, 179, 0.08);
+            transform: translateY(-2px);
         }
 
         .contact-icon {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             fill: #ff7eb3;
+            flex-shrink: 0;
+        }
+
+        .contact-content {
+            flex: 1;
+        }
+
+        .contact-label {
+            display: block;
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .contact-value {
+            font-size: 16px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .wechat-qr {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .wechat-qr:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -198,7 +248,7 @@
             <ul>
                 <li>在游戏界面拖动相同的元素进行合成</li>
                 <li>合成更高级的元素可以获得更高的分数</li>
-                <li>尝试获得最高分，挑战自己的���限</li>
+                <li>尝试获得最高分，挑战自己的限</li>
             </ul>
 
             <h2>主题选择</h2>
@@ -216,18 +266,27 @@
                 <li>支持自定义背景音乐</li>
             </ul>
             <div class="contact-info">
-                <strong>联系方式：</strong>
-                <div class="contact-item">
-                    <svg class="contact-icon" viewBox="0 0 24 24">
-                        <path d="M12,2C6.36,2 2,6.13 2,11.7C2,14.61 3.19,17.14 5.14,18.87C5.3,19 5.4,19.22 5.41,19.44L5.46,21.22C5.5,21.79 6.07,22.16 6.59,21.93L8.57,21.06C8.74,21 8.93,20.97 9.1,21C10,21.27 11,21.4 12,21.4C17.64,21.4 22,17.27 22,11.7C22,6.13 17.64,2 12,2Z"/>
-                    </svg>
-                    <span>微信：jiafeng__wang</span>
-                </div>
-                <div class="contact-item">
-                    <svg class="contact-icon" viewBox="0 0 24 24">
-                        <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
-                    </svg>
-                    <span>邮箱：jeffrey.muc@gmail.com</span>
+                <strong>联系方式</strong>
+                <div class="contact-items">
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path d="M12,2C6.36,2 2,6.13 2,11.7C2,14.61 3.19,17.14 5.14,18.87C5.3,19 5.4,19.22 5.41,19.44L5.46,21.22C5.5,21.79 6.07,22.16 6.59,21.93L8.57,21.06C8.74,21 8.93,20.97 9.1,21C10,21.27 11,21.4 12,21.4C17.64,21.4 22,17.27 22,11.7C22,6.13 17.64,2 12,2Z"/>
+                        </svg>
+                        <div class="contact-content">
+                            <span class="contact-label">微信账号</span>
+                            <span class="contact-value">jiafeng__wang</span>
+                            <img src="./images/wechat.jpeg" alt="微信二维码" class="wechat-qr">
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
+                        </svg>
+                        <div class="contact-content">
+                            <span class="contact-label">电子邮箱</span>
+                            <span class="contact-value">jeffrey.muc@gmail.com</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
